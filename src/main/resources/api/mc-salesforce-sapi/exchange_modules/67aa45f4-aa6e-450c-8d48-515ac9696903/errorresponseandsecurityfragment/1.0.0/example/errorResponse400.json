@@ -1,0 +1,6 @@
+{
+  "correlationId": "cid-400-001",
+  "errorCode": "ERR400_BAD_REQUEST",
+  "errorMessage": "Invalid request payload",
+  "errorDescription": "Required field 'order_id' is missing or invalid."
+}

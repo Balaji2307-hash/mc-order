@@ -1,0 +1,6 @@
+{
+  "correlationId": "cid-403-004",
+  "errorCode": "ERR403_FORBIDDEN",
+  "errorMessage": "Access denied",
+  "errorDescription": "You do not have permission to access this resource."
+}

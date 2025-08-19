@@ -1,0 +1,21 @@
+{
+  "dependencies": [
+    {
+      "version": "1.0.0",
+      "assetId": "errorresponseandsecurityfragment",
+      "groupId": "67aa45f4-aa6e-450c-8d48-515ac9696903",
+      "provided": false
+    }
+  ],
+  "version": "1.0.0",
+  "descriptorVersion": "1.0.0",
+  "classifier": "raml",
+  "main": "mc-salesforce-sapi-v1.raml",
+  "assetId": "mc-salesforce-sapi",
+  "groupId": "67aa45f4-aa6e-450c-8d48-515ac9696903",
+  "name": "mc-salesforce-sapi",
+  "organizationId": "67aa45f4-aa6e-450c-8d48-515ac9696903",
+  "apiVersion": "v1",
+  "tags": [],
+  "originalFormatVersion": "1.0"
+}

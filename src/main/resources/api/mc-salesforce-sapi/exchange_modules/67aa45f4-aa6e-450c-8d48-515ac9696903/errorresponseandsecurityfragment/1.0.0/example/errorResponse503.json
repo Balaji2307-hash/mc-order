@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-503-015",
+              "errorCode": "ERR503_SERVICE_UNAVAILABLE",
+              "errorMessage": "Service unavailable",
+              "errorDescription": "The server is currently unable to handle the request due to maintenance or overload."
+            }

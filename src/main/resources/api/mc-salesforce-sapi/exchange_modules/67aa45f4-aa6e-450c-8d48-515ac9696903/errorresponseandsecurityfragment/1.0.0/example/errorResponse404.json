@@ -1,0 +1,6 @@
+{
+  "correlationId": "cid-404-005",
+  "errorCode": "ERR404_NOT_FOUND",
+  "errorMessage": "Resource not found",
+  "errorDescription": "The requested audit record does not exist."
+}

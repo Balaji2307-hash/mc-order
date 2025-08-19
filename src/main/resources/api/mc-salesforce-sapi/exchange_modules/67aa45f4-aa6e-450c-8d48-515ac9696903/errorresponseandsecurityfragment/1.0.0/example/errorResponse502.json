@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-502-014",
+              "errorCode": "ERR502_BAD_GATEWAY",
+              "errorMessage": "Bad gateway",
+              "errorDescription": "Received an invalid response from the upstream server."
+            }

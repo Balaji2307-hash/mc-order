@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-409-010",
+              "errorCode": "ERR409_CONFLICT",
+              "errorMessage": "Conflict",
+              "errorDescription": "An audit record with the same ID already exists."
+            }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<configuration doc:name="Configuration" doc:id="b08a0d46-ebd1-477c-afeb-e19927556390" defaultErrorHandler-ref="common_error_handler" />
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="3c2533ba-d021-4a0b-a009-4d64107137c4" >
+		<salesforce:basic-connection username="${secure::sf.username}" password="${secure::sf.password}" securityToken="${secure::sf.securitykey}" />
+	</salesforce:sfdc-config>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="5d306197-0bab-45a2-906a-afa9ed88cad5" file="properties/${env}.yaml" key="${key}" />
+	<global-property doc:name="Global Property" doc:id="e0e4fafd-cfad-4e90-9f69-cd33065a72c5" name="env" value="dev" />
+	<global-property doc:name="Global Property" doc:id="f687925a-5688-4a8b-bf04-46b9fc99bb47" name="key" value="usernamepassword" />
+	<configuration-properties doc:name="Configuration properties" doc:id="dd8c5a03-5464-45c5-96e3-575662f1021b" file="properties/${env}.yaml" />
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="f44d97c8-83d2-45a2-b1da-76fe1874f590" flowRef="mc-salesforce-sapi-v1-main" />
+</mule>
