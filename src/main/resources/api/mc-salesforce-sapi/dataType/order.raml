@@ -1,0 +1,32 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+      order_id:
+        type: string
+        description: Unique order identifier
+        example: ORD-789
+      customer_id:
+        type: string
+        description: Unique customer identifier
+        example: CUST-456
+      items:
+        type: !include /dataType/orderItem.raml
+        description: List of items ordered
+      total:
+        type: number
+        format: double
+        minimum: 0
+        description: Total order amount
+        example: 7500.00
+      ip_address:
+        type: string
+        description: IP address of the customer
+        example: 192.168.1.1
+      billing_country:
+        type: string
+        description: Billing country ISO code (ISO 3166-1 alpha-2)
+        example: US
+      shipping_country:
+        type: string
+        description: Shipping country ISO code (ISO 3166-1 alpha-2)
+        example: CA

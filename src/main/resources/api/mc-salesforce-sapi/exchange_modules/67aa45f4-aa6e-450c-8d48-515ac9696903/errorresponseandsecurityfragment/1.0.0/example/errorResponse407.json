@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-407-008",
+              "errorCode": "ERR407_PROXY_AUTH_REQUIRED",
+              "errorMessage": "Proxy authentication required",
+              "errorDescription": "Proxy credentials required to access this resource."
+            }

@@ -1,0 +1,73 @@
+#%RAML 1.0 Trait
+usage: Adds standard error responses for common scenarios
+responses:
+      400:
+        description: Bad request
+        body:
+          application/json:
+            example: !include ../example/errorResponse400.json
+      401:
+        description: Unauthorized
+        body:
+          application/json:
+            example: !include ../example/errorResponse401.json
+      402:
+        description: Payment Required
+        body:
+          application/json:
+            example: !include ../example/errorResponse402.json
+      403:
+        description: Forbidden
+        body:
+          application/json:
+            example: !include ../example/errorResponse403.json
+      404:
+        description: Not Found
+        body:
+          application/json:
+            example: !include ../example/errorResponse404.json
+      405:
+        description: Method Not Allowed
+        body:
+          application/json:
+            example: !include ../example/errorResponse405.json
+      406:
+        description: Not Acceptable
+        body:
+          application/json:
+            example: !include ../example/errorResponse406.json
+      407:
+        description: Proxy Authentication Required
+        body:
+          application/json:
+            example: !include ../example/errorResponse407.json
+      408:
+        description: Request Timeout
+        body:
+          application/json:
+            example: !include ../example/errorResponse408.json
+      409:
+        description: Conflict
+        body:
+          application/json:
+            example: !include ../example/errorResponse409.json
+      500:
+        description: Internal Server Error
+        body:
+          application/json:
+            example: !include ../example/errorResponse500.json
+      501:
+        description: Not Implemented
+        body:
+          application/json:
+            example: !include ../example/errorResponse501.json
+      502:
+        description: Bad Gateway
+        body:
+          application/json:
+            example: !include ../example/errorResponse502.json
+      503:
+        description: Service Unavailable
+        body:
+          application/json:
+            example: !include ../example/errorResponse503.json

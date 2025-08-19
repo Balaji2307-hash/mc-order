@@ -1,0 +1,6 @@
+#%RAML 1.0 Library
+usage: Common error responses trait for all APIs
+securitySchemes:
+  clientIdCredentials: !include securitySchema/clientIdCredentials.raml
+traits:
+  errorResponses: !include traits/errorResponseTraits.raml

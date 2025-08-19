@@ -1,0 +1,6 @@
+{
+  "correlationId": "cid-401-002",
+  "errorCode": "ERR401_UNAUTHORIZED",
+  "errorMessage": "Authentication required",
+  "errorDescription": "No valid authentication credentials provided."
+}

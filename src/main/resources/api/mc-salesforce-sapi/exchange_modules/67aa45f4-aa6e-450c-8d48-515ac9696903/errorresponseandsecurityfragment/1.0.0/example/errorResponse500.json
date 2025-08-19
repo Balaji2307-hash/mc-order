@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-500-012",
+              "errorCode": "ERR500_INTERNAL_SERVER_ERROR",
+              "errorMessage": "Internal server error",
+              "errorDescription": "An unexpected error occurred on the server."
+            }

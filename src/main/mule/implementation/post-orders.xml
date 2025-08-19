@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3049324c-dd42-4c46-9e2c-b566dbb3c339" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<sub-flow name="post-orders" doc:id="dde760a7-39a1-4188-859a-5ee9d030adc9" >
+		<logger level="INFO" doc:name="start Logger" doc:id="8a55b307-42d7-4ae8-abfe-53c706a4d0e4" message='Create the Order to the salesforce' />
+		<set-variable value="#[payload]" doc:name="Set Variable" doc:id="ba55ba54-54ab-4fc9-a66e-3e78974805c4" variableName="originalPayload"/>
+		<ee:transform doc:name="order parameters" doc:id="0e0f29e3-ecb5-4dd9-8ce3-d5679d3a99b6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[
+  {
+    	order_Id_c__c: payload.order_id,
+    	customer_id_c__c: payload.customer_id,
+    	SKU_List_c__c: (payload.items map (i) -> i.sku) joinBy ",",
+    	Quantity__c: (payload.items map (i) -> i.qty as String) joinBy ",",
+    	Total__c: payload.total,
+    	Ip_address_c__c: payload.ip_address,
+    	billing_country_c__c: payload.billing_country,
+    	shipping_country_c__c: payload.shipping_country
+  }
+]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<until-successful maxRetries="5" doc:name="Until Successful" doc:id="91643edf-ea00-4001-95d7-80e9d0d79845" >
+			<try doc:name="Try" doc:id="2861ddc6-ad6b-40f6-84cd-f3ccf64a6daa" >
+				<salesforce:create type="orderProcessing__c" doc:name="Post Order" doc:id="fdee5708-61a3-4098-892c-3d30dfc05332" config-ref="Salesforce_Config" />
+				<error-handler >
+					<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f5833e9f-3323-4bef-b1c5-f008889d9a00" type="SALESFORCE:CONNECTIVITY">
+						<logger level="ERROR" doc:name="connectivityErrorLogger" doc:id="0bc05d63-29dd-4e3e-a739-77b20701a074" message="Connectivity Error - Error: #[error.description]"/>
+					</on-error-propagate>
+					<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="b2afc2c8-6e4d-4432-9af7-4280d2448ef9" type="ANY">
+						<logger level="ERROR" doc:name="generic Error Logger" doc:id="ca19a396-caf6-4d8d-aa20-d537f052ae4c" message="generic error - Error: #[error.description]"/>
+					</on-error-propagate>
+				</error-handler>
+			</try>
+		</until-successful>
+		<ee:transform doc:name="output payload" doc:id="da622c81-f32e-46b6-a4a1-7b276c268734" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+if (payload.successful)
+  {
+    status: "successful",
+    orderId: (vars.originalPayload.order_id as String) ++ "Successfully created"
+  }
+else
+{
+    status: "error",
+    message: payload.errors
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="End Logger" doc:id="f0529907-5fe5-40f9-8b81-3ffac759e6b1" message='Order has been successfully created' />
+	</sub-flow>
+</mule>

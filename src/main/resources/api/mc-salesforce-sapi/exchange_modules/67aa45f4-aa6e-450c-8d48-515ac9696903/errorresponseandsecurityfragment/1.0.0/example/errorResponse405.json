@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-405-006",
+              "errorCode": "ERR405_METHOD_NOT_ALLOWED",
+              "errorMessage": "Method not allowed",
+              "errorDescription": "POST method is not allowed on this endpoint."
+            }

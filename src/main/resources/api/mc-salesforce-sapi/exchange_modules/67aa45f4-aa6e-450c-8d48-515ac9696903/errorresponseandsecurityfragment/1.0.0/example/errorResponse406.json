@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-406-007",
+              "errorCode": "ERR406_NOT_ACCEPTABLE",
+              "errorMessage": "Not acceptable",
+              "errorDescription": "Requested content type is not supported."
+            }

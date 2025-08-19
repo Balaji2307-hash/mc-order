@@ -1,0 +1,25 @@
+#%RAML 1.0
+title: Salesforce Order API
+version: v1
+baseUri: http://localhost:8081/v1
+protocols:
+  - HTTP
+mediaType: application/json
+uses:
+  fragment: /exchange_modules/67aa45f4-aa6e-450c-8d48-515ac9696903/errorresponseandsecurityfragment/1.0.0/errorresponse.raml
+  order: /library/orderType.raml
+securedBy:
+  - fragment.clientIdCredentials
+/salesforce/order:
+  post:
+    is: [ fragment.errorResponses]
+    description: Create a new order record in Salesforce
+    body:
+      application/json:
+        example: !include /example/orderRequest.json
+    responses:
+      201:
+        description: Order successfully created
+        body:
+          application/json:
+            example: !include /example/orderResposne.json

@@ -1,0 +1,6 @@
+{
+              "correlationId": "cid-408-009",
+              "errorCode": "ERR408_REQUEST_TIMEOUT",
+              "errorMessage": "Request timeout",
+              "errorDescription": "The client did not produce a request within the time the server was prepared to wait."
+            }

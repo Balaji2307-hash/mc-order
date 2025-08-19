@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+<error-handler name="common_error_handler">
+            <on-error-propagate type="APIKIT:BAD_REQUEST">
+                <ee:transform doc:name="bad request">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+  correlationId: correlationId,
+  errorCode: 400,
+  errorMessage: error.errorType,
+  errorDescription: error.detailedescription
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[400]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="768649f4-a83a-41fe-af20-74508e53d6d4" message="bad request :::: Error: #[payload]" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_FOUND">
+                <ee:transform doc:name="apikit not found">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+  correlationId: correlationId,
+  errorCode: 404,
+  errorMessage: error.errorType,
+  errorDescription: error.detailedescription
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[404]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="60c11ddc-f64a-4eba-8a3d-00490c450278" message="apikit not found :::: Error: #[payload]" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:METHOD_NOT_ALLOWED">
+                <ee:transform doc:name="apikt method not allowed">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+  correlationId: correlationId,
+  errorCode: 405,
+  errorMessage: error.errorType,
+  errorDescription: error.detailedescription
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[405]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="58b13366-fd20-4cb6-ac37-614f067a5340" message="apikit method not allowed :::: Error: #[payload]" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_ACCEPTABLE">
+                <ee:transform doc:name="apikit not acceptable">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+  correlationId: correlationId,
+  errorCode: 406,
+  errorMessage: error.errorType,
+  errorDescription: error.detailedescription
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[406]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="d4e8b39c-29d7-499a-bf8a-19f9c29fb8b5" message="apikit not acceptable :::: Error: #[payload]" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+                <ee:transform doc:name="unsupported media type">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+  correlationId: correlationId,
+  errorCode: 415,
+  errorMessage: error.errorType,
+  errorDescription: error.detailedescription
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[415]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="067d0d7d-3a13-4001-b395-514119a4cf55" message="unsupported media type :::: Error: #[payload]" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_IMPLEMENTED">
+                <ee:transform doc:name="apikit not implemented">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+  correlationId: correlationId,
+  errorCode: 501,
+  errorMessage: error.errorType,
+  errorDescription: error.detailedescription
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[501]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="bd5bdbe5-ecc7-43a9-96da-5e110d17681b" message="apikit not implemented :::: Error: #[payload]" />
+            
+</on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_FOUND">
+                <ee:transform doc:name="apikit not found">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+  correlationId: correlationId,
+  errorCode: 404,
+  errorMessage: error.errorType,
+  errorDescription: error.detailedescription
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[404]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="dfd0cdc5-1b5a-4f8b-933f-ada097efabc0" message="Api kit not found :::: Error: #[payload]" />
+            
+</on-error-propagate>
+            <on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f8fc19eb-4927-4455-9c3c-78fba3d08a30" type="HTTP:UNAUTHORIZED">
+			<ee:transform doc:name="unauthorized error" doc:id="d61f97b8-3514-4ac0-9194-bdad0e20ff43" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  "correlationId": correlationId,
+  "errorStatusCode": 401,
+  "errormessage": error.errorMessage,
+  "errorDescription": error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<logger level="INFO" doc:name="Log error response" doc:id="a1d24a5b-ded7-4641-85a0-84a04f159ef8" message="Unauthorized :::: Error: #[payload]" />
+		
+</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="9dd7de4c-fa70-432e-8330-a97d1f4e651f" type="ANY">
+			<set-variable value="500" doc:name="Set HTTP Status" doc:id="b76c8dc8-eb27-4045-a795-000bae3bc42c" variableName="httpStatus" />
+			<ee:transform doc:name="Transform Generic Error" doc:id="92b3f04d-d2ec-492d-a425-aaeb4d874b15" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  "correlationId": correlationId,
+  "errorStatusCode": vars.httpStatus,
+  "errormessage": error.errorMessage,
+  "errorDescription": error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<logger level="ERROR" doc:name="Log Generic Error" doc:id="486d55c5-6039-4b3b-bbf9-3d1670614be0" message="Generic Error - Error: #[payload]" />
+		</on-error-propagate>
+</error-handler>
+        
+	</mule>

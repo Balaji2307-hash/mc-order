@@ -1,0 +1,6 @@
+{
+  "correlationId": "cid-402-001",
+  "errorCode": "ERR402_PAYMENT_REQUIRED",
+  "errorMessage": "Payment required",
+  "errorDescription": "Your subscription plan does not allow audit log creation. Please upgrade your plan."
+}
